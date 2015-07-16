@@ -151,4 +151,4 @@ function stackDeal() {
 }
 
 stackMakeDeck(1);
-$('#test').append('<img id="theImg" src=' + cards[08].image "/>")
+$('#test').append('<img id="theImg" src=' + cards[08].image "/>");
