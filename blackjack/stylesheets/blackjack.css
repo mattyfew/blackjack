@@ -8,20 +8,45 @@
 
 body {}
 
+#startmodal {
+	text-align: center;
+}
+
+h5 {
+	text-align: center;
+}
+
+p {
+	font-size: 19px;
+	text-align: right;
+}
+
+#bet-selector {
+	text-align: left;
+	
+}
+
+#bet-selector img {
+	max-height: 35px;
+}
+
 #container {
 	max-width: 1000px;
 	margin: auto;
-}
-
-section {
-	background: -webkit-linear-gradient(45deg, hsla(116, 100%, 10%, 1) 0%, hsla(116, 100%, 10%, 0) 70%), -webkit-linear-gradient(315deg, hsla(113, 100%, 40%, 1) 10%, hsla(113, 100%, 40%, 0) 80%), -webkit-linear-gradient(225deg, hsla(116, 100%, 20%, 1) 10%, hsla(116, 100%, 20%, 0) 80%), -webkit-linear-gradient(135deg, hsla(113, 100%, 10%, 1) 100%, hsla(113, 100%, 10%, 0) 70%);
+	margin-bottom: 40px;
+  	background: -webkit-linear-gradient(45deg, hsla(116, 100%, 10%, 1) 0%, hsla(116, 100%, 10%, 0) 70%), -webkit-linear-gradient(315deg, hsla(113, 100%, 40%, 1) 10%, hsla(113, 100%, 40%, 0) 80%), -webkit-linear-gradient(225deg, hsla(116, 100%, 20%, 1) 10%, hsla(116, 100%, 20%, 0) 80%), -webkit-linear-gradient(135deg, hsla(113, 100%, 10%, 1) 100%, hsla(113, 100%, 10%, 0) 70%);
 	background: linear-gradient(45deg, hsla(116, 100%, 10%, 1) 0%, hsla(116, 100%, 10%, 0) 70%), linear-gradient(135deg, hsla(113, 100%, 40%, 1) 10%, hsla(113, 100%, 40%, 0) 80%), linear-gradient(225deg, hsla(116, 100%, 20%, 1) 10%, hsla(116, 100%, 20%, 0) 80%), linear-gradient(315deg, hsla(113, 100%, 10%, 1) 100%, hsla(113, 100%, 10%, 0) 70%);
 	color: rgba(240, 240, 240, 1);
+	border-radius: 13px;
+}
+
+#top {
+	min-height: 6px;
 }
 
 .player {
 	background-color: red;
-	background-image: url("../images/Red-Pattern2.jpg");
+	background-image: url("../img/red-pattern2.jpg");
 	background-size: cover;
 	min-height: 200px;
 	border-radius: 8px;
@@ -34,7 +59,7 @@ section {
 
 .dealer {
 	background-color: red;
-	background-image: url("../images/Red-Pattern2.jpg");
+	background-image: url("../img/red-pattern2.jpg");
 	background-size: cover;
 	height: 200px;
 	border-radius: 8px;
@@ -46,18 +71,35 @@ section {
 }
 
 aside {
+	max-width: 250px;
 	border: solid black;
-	top: 0;
+	margin: 13px 6px 0 9px;
 	right: 0;
-	background-color:
+	font-family: 'Oxygen', sans-serif;
+	
 }
 
 button {
+	margin-top: 5px;
 	border: 7.5px;
 	margin: auto;
 }
 
+#player-bet {
+	border: 2px solid white;
+  	background: black;
+  	max-height: 150px;
+  	max-width: 150px;
+  	text-align: center;
+	color: yellow;
+  	margin: auto;
+}
+
 #bottom {
 	background: rgba(0, 0, 0, .3);
-	margin: auto;
+	margin: 5px 0 0 0;
+	border-bottom-left-radius: 13px;
+	border-bottom-right-radius: 13px;
+  	padding: 15px;
+  	padding-bottom: 0;
 }

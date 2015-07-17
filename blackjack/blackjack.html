@@ -4,68 +4,101 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href='http://fonts.googleapis.com/css?family=Oxygen:700' rel='stylesheet' type='text/css'>
+	<link rel="icon" href="img/favicon.png" type="image/png">
 	<title>BlackJack</title>
-
 	<link rel="stylesheet" href="stylesheets/normalize.css" />
 	<link rel="stylesheet" href="stylesheets/foundation.css" />
 	<link rel="stylesheet" href="stylesheets/blackjack.css" />
 </head>
 
 <body>
-	<header>
+	<div id="startmodal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 		<div class="row">
+			<div class="small-12 medium-9 medium-centered columns">
+				<h2 id="modalTitle">BlackJack!?</h2>
+				<p>Click the button below to shuffle the deck and start playing!</p>
+				<div class="dropdown">
+					<label>Please select the number of decks you wish to play with.
+						<select id="pickdecks" name="selectionField">
+							<option value="1">1 Deck (52 Cards)</option>
+							<option value="2">2 Decks (104 Cards)</option>
+							<option value="3">3 Decks (156 Cards)</option>
+							<option value="4">4 Decks (208 Cards)</option>
+							<option value="5">5 Decks (260 Cards)</option>
+						</select>
+					</label>
+				</div>
+				<a id="startbutton" class='open-first button success'>Let's Go!</a>
+			</div>
+		</div>
+	</div>
+	<header>
+		<div id="top" class="row">
 			<div class="small-12 medium-12 large-12 columns">
 				<h1>BlackJack</h1>
 			</div>
 		</div>
 	</header>
 	<div id="container">
-		<section>
-			<div class="row">
-				<div class="small-12 medium-12 large-12 columns">
-					The Table
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-4 columns">
-				</div>
-				<div class="small-4 columns dealer">
-					Dealer
-				</div>
-				<div class="small-4 columns">
-					<aside id="stats" class="panel callout radius">
-						<h5>Your Current Stats</h4>
+		<div class="row">
+			<div class="small-12 columns"></div>
+		</div>
+		<div class="row">
+			<div class="small-4 columns"></div>
+			<div class="small-4 columns dealer">Dealer</div>
+			<div class="small-4 columns">
+				<aside id="stats" class="panel callout radius">
+					<h5>Your Current Stats</h4>
 						<p>W: 189743 / L: 1 <br>Credits: $10,000</p>
 					</aside>
 				</div>
 			</div>
 			<div class="row">
 				<div class="small-2 columns"></div>
-				<div class="small-8 columns">
-					Middle of table
-				</div>
+				<div class="small-8 columns"></div>
 				<div class="small-2 columns"></div>
 			</div>
-			<div class="row">
-				<div class="small-4 columns"></div>
-				<div class="small-4 columns player">myHand</div>
-				<div class="small-4 columns"></div>
-			</div>
-			<div class="row" id="bottom">
-				<div class="small-4 columns"></div>
+			<div id="player-side-row" class="row">
 				<div class="small-4 columns">
-					<div class="row">
-						<div class="small-12 medium-6 columns">
-						<button id="hit" class="expand success">HIT</button></div>
-						<div class="small-12 medium-6 columns">					
-						<button id="stay" class="expand alert">STAY</button></div>
-					</div>
+				</div>
+				<div class="small-4 columns player">
+				<p>myHand</p>
 				</div>
 				<div class="small-4 columns"></div>
 			</div>
-		</section>
+  		<div id="below-player-side-row" class="row">
+		  <div class="small-4 columns">  
+			<ul id="bet-selector" class="inline-list">
+					  <li><img id="bet-1" src="img/chips/chip-01.png"/></li>
+					  <li><img id="bet-5" src="img/chips/chip-05.png"/></li>
+					  <li><img id="bet-10" src="img/chips/chip-10.png"/></li>
+					  <li><img id="bet-25" src="img/chips/chip-25.png"/></li>
+					  <li><img id="bet-100" src="img/chips/chip-100.png"/></li>
+			</ul>
+  		  </div>
+		  <div class="small-4 columns">
+			<div id="player-bet">
+				<p></p>
+			</div>
+		  </div>
+			  <div class="small-4 columns"></div>
+	   </div>
+	  		<div id="bottom" class="row" >
+		  		<div class="small-12 medium-6 medium-centered columns">
+				  <ul class="button-group round even-2">
+					  <li><a href="#" class="button">HIT</a></li>
+					  <li><a href="#" class="button">STAY</a></li>
+				  </ul>
+		  	</div>
+			<div class="small-12 medium-6 medium-centered columns">
+			  <ul class="button-group round even-2">
+				  <li><a href="#" class="button alert">SPLIT</a></li>
+				  <li><a href="#" class="button alert">DOUBLE-DOWN</a></li>
+			  </ul>
+			</div>
+		  </div>
 	</div>
-	<div id="test"></div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="scripts/foundation.min.js"></script>
 	<script src="scripts/blackjack.js"></script>
