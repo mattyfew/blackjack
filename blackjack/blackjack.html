@@ -14,7 +14,7 @@
 
 <body>
 	<div id="startmodal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-		<div class="row">
+		<div id="modalrow" class="row">
 			<div class="small-12 medium-9 medium-centered columns">
 				<h2 id="modalTitle">BlackJack!?</h2>
 				<p>Click the button below to shuffle the deck and start playing!</p>
@@ -29,7 +29,7 @@
 						</select>
 					</label>
 				</div>
-				<a id="startbutton" class='open-first button success'>Let's Go!</a>
+				<a id="startbutton" class='open-first button success'>Deal em'</a>
 			</div>
 		</div>
 	</div>
@@ -70,19 +70,25 @@
   		<div id="below-player-side-row" class="row">
 		  <div class="small-4 columns">  
 			<ul id="bet-selector" class="inline-list">
-					  <li><img id="bet-1" src="img/chips/chip-01.png"/></li>
-					  <li><img id="bet-5" src="img/chips/chip-05.png"/></li>
-					  <li><img id="bet-10" src="img/chips/chip-10.png"/></li>
-					  <li><img id="bet-25" src="img/chips/chip-25.png"/></li>
-					  <li><img id="bet-100" src="img/chips/chip-100.png"/></li>
+				<li><img id="bet-1" src="img/chips/chip-01.png"/></li>
+				<li><img id="bet-5" src="img/chips/chip-05.png"/></li>
+				<li><img id="bet-10" src="img/chips/chip-10.png"/></li>
+				<li><img id="bet-25" src="img/chips/chip-25.png"/></li>
+			    <li><img id="bet-100" src="img/chips/chip-100.png"/></li>
 			</ul>
   		  </div>
 		  <div class="small-4 columns">
 			<div id="player-bet">
+				<h4>My Bet</h4>
 				<p></p>
 			</div>
 		  </div>
-			  <div class="small-4 columns"></div>
+		  <div class="small-4 columns">
+			<div id="bankroll">
+				<h4>Bankroll</h4>
+				<p></p>
+			</div>
+		  </div>
 	   </div>
 	  		<div id="bottom" class="row" >
 		  		<div class="small-12 medium-6 medium-centered columns">

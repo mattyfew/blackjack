@@ -12,13 +12,19 @@ body {}
 	text-align: center;
 }
 
+h4 {
+	color: white;
+}
+
+
 h5 {
 	text-align: center;
 }
 
 p {
 	font-size: 19px;
-	text-align: right;
+	text-align: center;
+	
 }
 
 #bet-selector {
@@ -26,8 +32,13 @@ p {
 	
 }
 
+#bet-selector li {
+	margin-left: 0;
+}
+
 #bet-selector img {
-	max-height: 35px;
+	max-height: 50px;
+	cursor: pointer;
 }
 
 #container {
@@ -86,6 +97,17 @@ button {
 }
 
 #player-bet {
+	border: 2px solid white;
+  	background: black;
+  	max-height: 150px;
+  	max-width: 150px;
+  	text-align: center;
+	color: yellow;
+  	margin: auto;
+
+}
+
+#bankroll {
 	border: 2px solid white;
   	background: black;
   	max-height: 150px;

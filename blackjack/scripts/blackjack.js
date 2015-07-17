@@ -1,7 +1,3 @@
-console.log("Linked, you're good");
-
-//****************MODAL****************
-
 $(document).ready(function () {
 	function startModal() {
 		$('#startmodal').foundation('reveal', 'open');
@@ -9,10 +5,11 @@ $(document).ready(function () {
 			$('#startmodal').foundation('reveal', 'close');
 			var numDecks = $('#pickdecks').val();
 			stackMakeDeck(numDecks);
-			stackShuffle(numDecks)
+			stackShuffle(numDecks);
 			console.log(cards);
-		})
+		});
 	}
+
 	startModal();
 
 
@@ -165,12 +162,21 @@ $(document).ready(function () {
 				this.cards[k] = temp;
 			}
 	}
+
+	var Chip = function (amount, location) {
+		this.amount = amount;
+		this.location = location;
+	}
+
+
 });
 //*******READY IS BROKEN FROM HERE ON**************
 //Global var
 
-var bankroll = 11500;
-var totalBet = 0;
+var bankroll = 500;
+var $totalBet = 0;
+$currentBet = $("#player-bet p");
+$bankRollDisplay = $("#bankroll p");
 
 
 //***************************stack DEAL*******************************
@@ -183,18 +189,77 @@ function stackDeal() {
 		return null;
 }
 
-function addBet(){
-	this.value = value;
-  	if(this.value > totalBet){
-  		alert("Sorry your out of credits");
-  	} else {
-  		totalBet += this.value;
-  	}
-}
+//function addBet(){
+//	this.value = value;
+//  	if(this.value > totalBet){
+//  		alert("Sorry your out of credits");
+//  	} else {
+//  		$totalBet += this.value;
+// }
+//}
+var $bet1 = $('#bet-1');
+var $bet5 = $('#bet-5');
+var $bet10 = $('#bet-10');
+var $bet25 = $('#bet-25');
+var $bet100 = $('#bet-100');
 
-function placeBet() {
-	$bet1 = $('#bet-1');
-	$bet1.on('click', $bet1.addBet())
-	});
-	
-}
+$($bet1).on('click', function () {
+	if (1 < bankroll) {
+		$totalBet += 1;
+		bankroll -= 1;
+		$bankRollDisplay.html("$" + bankroll);
+		$currentBet.html("$" + $totalBet);
+		console.log($totalBet);
+		console.log(bankroll);
+	} else {
+		alert("Sorry you are out of credits");
+	}
+})
+$($bet5).on('click', function () {
+	if (5 < bankroll) {
+		$totalBet += 5;
+		bankroll -= 5;
+		$bankRollDisplay.html("$" + bankroll);
+		$currentBet.html("$" + $totalBet);
+		console.log($totalBet);
+		console.log(bankroll);
+	} else {
+		alert("Sorry you are out of credits");
+	}
+})
+$($bet10).on('click', function () {
+	if (10 < bankroll) {
+		$totalBet += 10;
+		bankroll -= 10;
+		$bankRollDisplay.html("$" + bankroll);
+		$currentBet.html("$" + $totalBet);
+		console.log($totalBet);
+		console.log(bankroll);
+	} else {
+		alert("Sorry you are out of credits");
+	}
+})
+$($bet25).on('click', function () {
+	if (25 < bankroll) {
+		$totalBet += 25;
+		bankroll -= 25;
+		$bankRollDisplay.html("$" + bankroll);
+		$currentBet.html("$" + $totalBet);
+		console.log($totalBet);
+		console.log(bankroll);
+	} else {
+		alert("Sorry you are out of credits");
+	}
+})
+$($bet100).on('click', function () {
+	if (100 < bankroll) {
+		$totalBet += 100;
+		bankroll -= 100;
+		$bankRollDisplay.html("$" + bankroll);
+		$currentBet.html("$" + $totalBet);
+		console.log($totalBet);
+		console.log(bankroll);
+	} else {
+		alert("Sorry you are out of credits");
+	}
+})
