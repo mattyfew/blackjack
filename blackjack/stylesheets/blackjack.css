@@ -12,6 +12,11 @@ body {}
 	text-align: center;
 }
 
+.card {
+   max-width: 70px;
+   margin: 0 15px 15px 0;
+}
+
 h4 {
 	color: white;
 }
@@ -116,6 +121,28 @@ button {
 	color: yellow;
   	margin: auto;
 }
+
+#play-button {
+
+}
+
+#prompter {
+	text-align: center;
+}
+
+#prompter-module {
+	border: solid black;
+	background-color: white;
+	color: black;
+}
+
+#prompter h4 {
+	border: solid black;
+	background-color: white;
+	color: black;
+}
+
+
 
 #bottom {
 	background: rgba(0, 0, 0, .3);

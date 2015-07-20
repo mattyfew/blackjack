@@ -46,7 +46,10 @@
 		</div>
 		<div class="row">
 			<div class="small-4 columns"></div>
-			<div class="small-4 columns dealer">Dealer</div>
+			<div id="dealer" class="small-4 columns dealer">
+				<h3>Dealer</h3>
+				<p></p>
+			</div>	
 			<div class="small-4 columns">
 				<aside id="stats" class="panel callout radius">
 					<h5>Your Current Stats</h4>
@@ -60,21 +63,28 @@
 				<div class="small-2 columns"></div>
 			</div>
 			<div id="player-side-row" class="row">
-				<div class="small-4 columns">
+				<div id="prompter-module" class="small-4 columns">
+					<div class="row">
+						<div id="prompter" class="small-12 columns">
+							<h4>Prompter</h4>
+							<p></p>
+						</div>
+					</div>
 				</div>
-				<div class="small-4 columns player">
-				<p>myHand</p>
+				<div id="myHand" class="small-4 columns player">
+					<h3>myHand</h3>
+					<p></p>
 				</div>
 				<div class="small-4 columns"></div>
 			</div>
   		<div id="below-player-side-row" class="row">
 		  <div class="small-4 columns">  
 			<ul id="bet-selector" class="inline-list">
-				<li><img id="bet-1" src="img/chips/chip-01.png"/></li>
-				<li><img id="bet-5" src="img/chips/chip-05.png"/></li>
-				<li><img id="bet-10" src="img/chips/chip-10.png"/></li>
-				<li><img id="bet-25" src="img/chips/chip-25.png"/></li>
-			    <li><img id="bet-100" src="img/chips/chip-100.png"/></li>
+				<li id="bet-1" class="bet" value="1" ><img src="img/chips/chip-01.png"/></li>
+				<li id="bet-5" class="bet" value="5"><img src="img/chips/chip-05.png"/></li>
+				<li id="bet-10" class="bet" value="10"><img src="img/chips/chip-10.png"/></li>
+				<li id="bet-25" class="bet" value="25" ><img src="img/chips/chip-25.png"/></li>
+			    <li id="bet-100" class="bet" value="100"><img src="img/chips/chip-100.png"/></li>
 			</ul>
   		  </div>
 		  <div class="small-4 columns">
@@ -93,15 +103,18 @@
 	  		<div id="bottom" class="row" >
 		  		<div class="small-12 medium-6 medium-centered columns">
 				  <ul class="button-group round even-2">
-					  <li><a href="#" class="button">HIT</a></li>
-					  <li><a href="#" class="button">STAY</a></li>
+					  <li><a href="#" class="button" value="hit">HIT</a></li>
+					  <li><a href="#" class="button" value="stay">STAY</a></li>
 				  </ul>
-		  	</div>
+		  		</div>
 			<div class="small-12 medium-6 medium-centered columns">
-			  <ul class="button-group round even-2">
-				  <li><a href="#" class="button alert">SPLIT</a></li>
-				  <li><a href="#" class="button alert">DOUBLE-DOWN</a></li>
+			  <ul id="dealer-actions-extra"class="button-group round even-2">
+				  <li><a href="#" class="button alert" value="split">SPLIT</a></li>
+				  <li><a href="#" class="button alert" value="doubledown">DOUBLE-DOWN</a></li>
 			  </ul>
+			</div>
+			  <div class="small-12 medium-6 medium-centered columns">
+				  <button id="play-button" class="button round even-2" value="play">PLAY</button>
 			</div>
 		  </div>
 	</div>
