@@ -14,7 +14,11 @@ function startModal() {
 	});
 }
 
-var $playButton = $('#play-button')
+//DOM Buttons
+var $playButton = $('#play-button');
+var $hitButton = $('#hit-button');
+var $stayButton = $('#stay-button');
+
 var bankroll = 500;
 var totalBet = 0;
 var discarded = [];
@@ -24,7 +28,8 @@ var dealerScore = 0;
 var playerScore = 0;
 var dealRoundCounter = 1;
 var $prompter = $("#prompter p");
-var dealTimeDelay = 3000;
+var dealTimeDelay = 8000;
+var gameOver = false;
 
 
 $currentBet = $("#player-bet p");
@@ -41,6 +46,8 @@ function setStatus(currentStatus) {
 		$prompter.html("Please place your bets<br/>and click PLAY");
 		placeBets();
 		$playButton.on("click", function () {
+			$(".bet").off("click");
+			$(".bet").css("cursor", "default");
 			console.log("clicked");
 			setStatus("Round Start");
 		});
@@ -49,12 +56,36 @@ function setStatus(currentStatus) {
 	case "Round Start":
 		dealRound();
 		console.log("Player: ", player, " Dealer: ", dealer);
-		//player.handGetScore();
-		$prompter.html("Would you like to hit or stay?");
+		//First, get the score, determine whether it is blackjack. If it is not, then ask to hit or stay
+		playerScore = getHandScore(player);
+		dealerScore = getHandScore(dealer);
+		console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
+		checkForWinner(player, dealer);
+		$prompter.html("Current Score: " + playerScore + "<br>Would you like to hit or stay?");
+		//HIT
+		$hitButton.on("click", function () {
+				console.log("Hit Button clicked!");
+				hit(player);
+			})
+			//STAY
+		$stayButton.on("click", function () {
+			console.log("Stay Button clicked!");
+			stay();
+			setStatus("Dealers Turn");
+		});
 		break;
 
 
-	case "Deal":
+	case "Dealers Turn":
+		$('#d-card-face-down').hide();
+		$('#d-card-1').show();
+		getHandScore(dealer);
+		while (dealerScore < 17) {
+			dealerHit(dealer);
+		}
+		if (dealerScore >= 17) {
+			checkForWinner();
+		}
 		break;
 	}
 }
@@ -93,24 +124,7 @@ function dealRound() {
 			dCard2.attr('src', dealer[1].image);
 			dCard2.appendTo('#dealer');
 			break;
-
-			//        default:
-
-			// No more cards to deal, play the round.
-
-			//            playRound();
-			//            return;
-			//            break;
 		}
-
-		// Update the player's score.
-
-		if (player.handGetScore() == 21) {
-			
-			$prompter.html("Blackjack, You Win!");
-		} else
-			$prompter.html("Your current score is " + player.handGetScore());
-
 		// Set a timer for the next call.
 
 		dealRoundCounter++;
@@ -137,10 +151,11 @@ function Stack() {
 
 //***************************Card Constructor*********************
 
-var Card = function (suit, rank, image) {
+var Card = function (suit, rank, image, value) {
 	this.rank = rank;
 	this.suit = suit;
 	this.image = image;
+	this.value = value;
 
 	this.toString = cardToString;
 	//this.createNode = cardCreateNode;
@@ -232,6 +247,7 @@ function stackMakeDeck(n) {
 	var imgUrls = ["img/cards/c01.png", "img/cards/c02.png", "img/cards/c03.png", "img/cards/c04.png", "img/cards/c05.png", "img/cards/c06.png", "img/cards/c07.png", "img/cards/c08.png", "img/cards/c09.png", "img/cards/c10.png", "img/cards/c11.png", "img/cards/c12.png", "img/cards/c13.png", "img/cards/d01.png", "img/cards/d02.png", "img/cards/d03.png", "img/cards/d04.png", "img/cards/d05.png", "img/cards/d06.png", "img/cards/d07.png", "img/cards/d08.png", "img/cards/d09.png", "img/cards/d10.png", "img/cards/d11.png", "img/cards/d12.png", "img/cards/d13.png", "img/cards/h01.png", "img/cards/h02.png", "img/cards/h03.png", "img/cards/h04.png", "img/cards/h05.png", "img/cards/h06.png", "img/cards/h07.png", "img/cards/h08.png", "img/cards/h09.png", "img/cards/h10.png", "img/cards/h11.png", "img/cards/h12.png", "img/cards/h13.png", "img/cards/s01.png", "img/cards/s02.png", "img/cards/s03.png", "img/cards/s04.png", "img/cards/s05.png", "img/cards/s06.png", "img/cards/s07.png", "img/cards/s08.png", "img/cards/s09.png", "img/cards/s10.png", "img/cards/s11.png", "img/cards/s12.png", "img/cards/s13.png"];
 	var i, j, k;
 	var m;
+	var values = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10];
 
 	m = ranks.length * suits.length;
 
@@ -244,7 +260,7 @@ function stackMakeDeck(n) {
 	for (i = 0; i < n; i++) {
 		for (j = 0; j < suits.length; j++) {
 			for (k = 0; k < ranks.length; k++) {
-				this.cards[i * m + j * ranks.length + k] = new Card(suits[j], ranks[k], imgUrls[j * ranks.length + k]);
+				this.cards[i * m + j * ranks.length + k] = new Card(suits[j], ranks[k], imgUrls[j * ranks.length + k], values[k]);
 			}
 		}
 	}
@@ -326,40 +342,136 @@ function getNextCard() {
 	}
 }
 
-////*****************  HIT  *****************************
-//
-//function hit(card, array) {
-//	card = getNextCard();
-//	stackAddCard(card, array);
-//}
-//
-////************************* GET SCORE ************************
+//******************** Update the player's score ********************
+//Description: adds the values of all cards in the hand, then runs checkForWinner
 
-function handGetScore() {
+function getHandScore(array) {
+	var score = 0;
 
-	var i, total;
+	for (var i = 0; i < array.length; i++) {
+		score += array[i].value;
+	}
+	return score;
+}
 
-	total = 0;
+// **************** CHECK SCORE **********************
+//Description: checks through each winning scenario. The order is very important. 
+//This should be ran everytime the dealer hits.
 
-	// Total card values counting Aces as one.
+function checkForWinner() {
+	if (playerScore === 21) {
+		$prompter.html("BlackJack. You win 1.5x your total bet!!");
+		bankroll += (totalBet * 1.5);
+		totalBet = 0;
+		gameOver = true;
+	} else if (playerScore === 21 && dealerScore === 21) {
+		$prompter.html("Both the dealer and the player hit BlackJack. <br>PUSH!");
+		bankroll += totalBet;
+		totalBet = 0;
+		gameOver = true;
+	} else if (playerScore > 21) {
+		$prompter.html("Player busts. You Lose!");
+		bankroll -= totalBet;
+		totalBet = 0;
+		gameOver = true;
+	} else if (dealerScore > 21) {
+		$prompter.html("Dealer busts. <br> You Win!!");
+		gameOver = true;
+	} else if (playerScore > dealerScore) {
+		$prompter.html("You win!!");
+		gameOver = true;
+	} else if (dealerScore > playerScore) {
+		$prompter.html("Dealer wins!");
+		gameOver = true;
+	} else if (dealerScore === playerScore) {
+		$prompter.html("Push");
+		gameOver = true;
+	} else {
+		gameOver = false;
+	}
+}
 
-	for (i = 0; i < this.length; i++)
-		if (this[i].rank == "A")
-			total++;
-		else {
-			if (this[i].rank == "J" || this[i].rank == "Q" ||
-				this[i].rank == "K") {
-				total += 10;
-			} else {
-				total += parseInt(this[i].rank, 10);
+//**************** BLACKJACK **********************
+
+function blackjack(score) {
+	if (score === 21) {
+		return this.blackjack = true;
+	} else {
+		return this.blackjack = false;
+	}
+}
+
+//*****************  HIT  *****************************
+//Description: takes card from deck, adds it to player array
+
+function hit(array) {
+		var newCard = stackAddCard(stackDeal(), player);
+		var playerHitCard = $('<img id="p-card-' + player.length + '" class="card">');
+		playerHitCard.attr('src', player[player.length - 1].image);
+		playerHitCard.appendTo('#myHand');
+		playerScore = getHandScore(player);
+		if (playerScore > 21) {
+			for (var i = 0; i < player.length; i++) {
+				if (player[i].value === 11) {
+					player[i].value = 1;
+				}
 			}
 		}
+		playerScore = getHandScore(player);
+		$prompter.html("Current Score: " + playerScore + "<br>Hit or Stay?")
+		if (playerScore > 21) {
+			console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
+			checkForWinner();
+		}
+	}
+	//****************** Dealer Hit **********************
 
-		// Change as many ace values to 11 as possible.
+function dealerHit(dealerArray) {
+	var newCard = stackAddCard(stackDeal(), dealer);
+	var dealerHitCard = $('<img id="d-card-' + dealer.length + '" class="card">');
+	dealerHitCard.attr('src', dealer[dealer.length - 1].image);
+	dealerHitCard.appendTo('#dealer');
+	dealerScore = getHandScore(dealer);
+	if (dealerScore > 21) {
+		for (var i = 0; i < dealer.length; i++) {
+			if (dealer[i].value === 11) {
+				dealer[i].value = 1;
+			}
+		}
+	}
+	playerScore = getHandScore(player);
+	console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
+	console.log("Dealer Hand: " + dealer);
+	checkForWinner();
+}
 
-	for (i = 0; i < this.length; i++)
-		if (this.rank == "A" && total <= 11)
-			total += 10;
+//***************** STAY ****************************
 
-	return total;
+function stay() {
+
+	$prompter.html("Dealer's Turn");
+
+}
+
+//************** GAME RESET ***************************'
+/*Description: if gameOver = true, then the following must happen.....
+ * 1.player and dealer hands must be moved to discarded pile
+ * 2.totalBet must be set to 0
+ * 3.totalBet should be either added or subtracted to bankroll
+ * 4.New game should be started, skipping startModal() and instead prompting user to place bet
+ */
+
+function gameReset() {
+	if (gameOver === true) {
+		for (var i = 0; i < player.length; i++) {
+			for (var j = 0; j < dealer.length; j++) {
+				discarded.push(dealer[j]);
+			}
+			discarded.push(player[i]);
+		}
+		player = [];
+		dealer = [];
+		bankroll =
+			setStatus("Round Start");
+	}
 }
