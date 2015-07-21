@@ -60,13 +60,14 @@ function setStatus(currentStatus) {
 		playerScore = getHandScore(player);
 		dealerScore = getHandScore(dealer);
 		console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
-		checkForWinner(player, dealer);
 		$prompter.html("Current Score: " + playerScore + "<br>Would you like to hit or stay?");
 		//HIT
 		$hitButton.on("click", function () {
 				console.log("Hit Button clicked!");
 				hit(player);
-			})
+				playerScore = getHandScore(player);
+				console.log(playerScore);
+			});
 			//STAY
 		$stayButton.on("click", function () {
 			console.log("Stay Button clicked!");
@@ -74,7 +75,6 @@ function setStatus(currentStatus) {
 			setStatus("Dealers Turn");
 		});
 		break;
-
 
 	case "Dealers Turn":
 		$('#d-card-face-down').hide();
@@ -330,14 +330,12 @@ function stackAddCard(card, array) {
 //****************GET NEXT CARD******************
 
 function getNextCard() {
-
 	// If there are no cards left, start a new deck.
 
 	if (cards.length == 0) {
 		alert("No more cards in deck, please reset");
 		newDeck();
 	} else {
-
 		return cards.stackDeal();
 	}
 }
@@ -360,10 +358,12 @@ function getHandScore(array) {
 
 function checkForWinner() {
 	if (playerScore === 21) {
-		$prompter.html("BlackJack. You win 1.5x your total bet!!");
-		bankroll += (totalBet * 1.5);
+		$prompter.html("Player hit 21! You win!!");
+		bankroll += totalBet;
 		totalBet = 0;
 		gameOver = true;
+	} else if (dealerScore === 21) {
+		$prompter.html("Dealer wins")
 	} else if (playerScore === 21 && dealerScore === 21) {
 		$prompter.html("Both the dealer and the player hit BlackJack. <br>PUSH!");
 		bankroll += totalBet;
@@ -384,6 +384,7 @@ function checkForWinner() {
 		$prompter.html("Dealer wins!");
 		gameOver = true;
 	} else if (dealerScore === playerScore) {
+		debugger
 		$prompter.html("Push");
 		gameOver = true;
 	} else {
@@ -405,29 +406,36 @@ function blackjack(score) {
 //Description: takes card from deck, adds it to player array
 
 function hit(array) {
-		var newCard = stackAddCard(stackDeal(), player);
-		var playerHitCard = $('<img id="p-card-' + player.length + '" class="card">');
-		playerHitCard.attr('src', player[player.length - 1].image);
-		playerHitCard.appendTo('#myHand');
-		playerScore = getHandScore(player);
-		if (playerScore > 21) {
-			for (var i = 0; i < player.length; i++) {
-				if (player[i].value === 11) {
-					player[i].value = 1;
-				}
+	stackAddCard(stackDeal(), player);
+	var playerHitCard = $('<img id="p-card-' + player.length + '" class="card">');
+	playerHitCard.attr('src', player[player.length - 1].image);
+	playerHitCard.appendTo('#myHand');
+	playerScore = getHandScore(player);
+	if (playerScore > 21) {
+		for (var i = 0; i < player.length; i++) {
+			if (player[i].value === 11) {
+				player[i].value = 1;
 			}
 		}
-		playerScore = getHandScore(player);
-		$prompter.html("Current Score: " + playerScore + "<br>Hit or Stay?")
-		if (playerScore > 21) {
-			console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
-			checkForWinner();
-		}
+	};
+	
+	playerScore = getHandScore(player);
+	if (playerScore > 21) {
+		$prompter.html("Player busted. You lose!");
+		gameOver = true;
+	} else if (playerScore === 21) {
+		$prompter.html("You hit 21!");
+		setStatus("Dealers Turn");
+	} else if (playerScore < 21) {
+		console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
+		$prompter.html("Current Score: " + playerScore + "<br>Hit or Stay?");
 	}
-	//****************** Dealer Hit **********************
+}
+
+//****************** Dealer Hit **********************
 
 function dealerHit(dealerArray) {
-	var newCard = stackAddCard(stackDeal(), dealer);
+	stackAddCard(stackDeal(), dealer);
 	var dealerHitCard = $('<img id="d-card-' + dealer.length + '" class="card">');
 	dealerHitCard.attr('src', dealer[dealer.length - 1].image);
 	dealerHitCard.appendTo('#dealer');
@@ -438,11 +446,12 @@ function dealerHit(dealerArray) {
 				dealer[i].value = 1;
 			}
 		}
+		dealerScore = getHandScore(dealer);
+	} else if (dealerScore === 21) {
+		checkForWinner();
+	} else {
+		dealerScore = getHandScore(player);
 	}
-	playerScore = getHandScore(player);
-	console.log("Player Score: " + playerScore + "; Dealer Score: " + dealerScore);
-	console.log("Dealer Hand: " + dealer);
-	checkForWinner();
 }
 
 //***************** STAY ****************************
