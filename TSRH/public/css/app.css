@@ -1,0 +1,54 @@
+header{
+  margin: auto;
+  text-align: center;
+}
+
+body {
+  margin: 20px;
+}
+
+#title {
+  font-family: 'Orbitron', sans-serif;
+  text-decoration:underline;
+  font-size: 4em
+}
+
+#top-row {
+
+}
+
+#top-right-wrapper{
+  float: left;
+}
+
+#container{
+  max-width: 1000px;
+  border: solid black;
+}
+
+.top-icon {
+  max-height: 70px;
+}
+
+.top-right-icon {
+  float: right;
+}
+
+.top-left-icon {
+  float: left;
+}
+
+.thread {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin: 0 0 5px 0;
+  padding: 10px;
+}
+
+.header-side {
+  text-align: center;
+}
+
+.spacer{
+  border-right: 1px solid white;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "tsrh",
+  "version": "1.0.0",
+  "description": "An exclusive forum where registered users can post, read, and comment on all topics relevant to the culture of TSRH.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "mattyfew.github.io"
+  },
+  "keywords": [
+    "forum",
+    "tsrh",
+    "foundation",
+    "jquery",
+    "express"
+  ],
+  "author": "Matt Fewer",
+  "license": "ISC"
+}
