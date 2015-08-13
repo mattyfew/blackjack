@@ -1,54 +1,71 @@
-header{
+header {
   margin: auto;
   text-align: center;
 }
-
-body {
-  margin: 20px;
-}
-
+body {}
 #title {
   font-family: 'Orbitron', sans-serif;
-  text-decoration:underline;
+  text-decoration: underline;
   font-size: 4em
 }
-
-#top-row {
-
+#top-row {}
+#container-inner {
+  border: 1px solid black;
+  margin-bottom: 15px;
 }
-
-#top-right-wrapper{
+#top-right-wrapper {
   float: left;
 }
-
-#container{
-  max-width: 1000px;
-  border: solid black;
+#container {
+  background-color: white;
 }
-
 .top-icon {
   max-height: 70px;
 }
-
 .top-right-icon {
   float: right;
 }
-
 .top-left-icon {
   float: left;
 }
-
 .thread {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
   margin: 0 0 5px 0;
   padding: 10px;
+  background-color: white
 }
+.thread-icon {}
+
+
 
 .header-side {
   text-align: center;
 }
-
-.spacer{
+.spacer {
   border-right: 1px solid white;
+}
+
+/*inputs in /tsrh/new */
+
+
+#thread-input-center {
+  height: 53px;
+}
+
+#thread-input-right {
+  height: 53px;
+}
+
+.input-top {
+  padding: 25px 25px 5px 25px;
+}
+
+
+.dd-selected-image {
+  max-height: 31px;
+}
+
+footer {
+  background-color: dimgray;
 }

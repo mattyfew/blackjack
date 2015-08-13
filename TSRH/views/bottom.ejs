@@ -1,8 +1,18 @@
 <script src="/js/vendor/jquery.js"></script>
+<script src="/js/jquery.ddslick.min.js" type="text/javascript"></script>
 <script src="/js/vendor/fastclick.js"></script>
 <script src="/js/foundation.min.js"></script>
 <script>
   $(document).foundation();
+
+  $(document).ready(function() {
+    $('#myDropDown').ddslick({
+      onSelected: function(selectedData) {
+        //callback function: do something with selectedData;
+      }
+    })
+  });
+
 </script>
 </body>
 </html>
