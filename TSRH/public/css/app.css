@@ -49,11 +49,15 @@ body {}
 /*inputs in /tsrh/new */
 
 
-#thread-input-center {
+#thread-new-left {
   height: 53px;
 }
 
-#thread-input-right {
+#thread-new-right {
+  height: 53px;
+}
+
+#thread-input-name {
   height: 53px;
 }
 

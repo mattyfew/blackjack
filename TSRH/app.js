@@ -31,14 +31,16 @@ app.get('/tsrh/:id/edit', function(req,res){
   });
 });
 app.get('/tsrh/:id', function(req,res){
-//  var id = req.params.id;
-//  //Do I need this? admin only
-//  db.run('UPDATE threads SET title=?, syb')
-//  if(err){
-//    throw err;
-//  } else {
-//    res.redirect('/tsrh'+id)
-//  }
+  var id = req.params.id;
+  
+  db.all('SELECT name, team_id FROM characters WHERE id=?', req.params.id, function(err, rows){
+    if(err){
+      throw err;
+    } else {
+      console.log(rows);
+      res.render('show.ejs', {thisThread : rows});
+    }
+  });
 });
 app.post('tsrh', function(req,res){
 //  db.run('INSERT INTO threads (title,subtitle,author_id,content,topic_img_id) VALUES (?,?,?,?,?)',

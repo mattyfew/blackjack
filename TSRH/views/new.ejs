@@ -1,84 +1,96 @@
 <% include top.ejs %>
 
-<div id="container">
+  <div id="container">
 
-  <div id="container-inner" class="row">
-    <div class="small-12 columns">
-      <div class="row">
-        <div class="contain-to-grid sticky small-12 columns">
+    <div id="container-inner" class="row">
+      <div class="small-12 columns">
+        <div class="row">
+          <div class="contain-to-grid sticky small-12 columns">
 
-          <!--    NAVIGATION BAR   -->
-          <nav class="top-bar" role=>
-            <ul class="title-area">
-              <li class="name">
-                <h1><a href="#">TSRH</a></h1>
-              </li>
-              <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-            </ul>
-            <section class="top-bar-section">
-              <!-- Left Nav Section -->
-              <ul class="left">
-                <li><a href="#">Popular Topics</a></li>
-                <li class="divider"></li>
-                <li class="has-form"><a class="button alert" href="/tsrh/new">Submit New</a></li>
+            <!--    NAVIGATION BAR   -->
+            <nav class="top-bar" role=>
+              <ul class="title-area">
+                <li class="name">
+                  <h1><a href="#">TSRH</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
               </ul>
+              <section class="top-bar-section">
+                <!-- Left Nav Section -->
+                <ul class="left">
+                  <li><a href="#">Popular Topics</a></li>
+                  <li class="divider"></li>
+                  <li class="has-form"><a class="button alert" href="/tsrh/new">Submit New</a></li>
+                </ul>
 
-              <!-- Right Nav Section -->
-              <ul class="right">
-                <li><a href="#">User Info(2)</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Logout</a></li>
-              </ul>
-            </section>
-          </nav>
+                <!-- Right Nav Section -->
+                <ul class="right">
+                  <li><a href="#">User Info(2)</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+              </section>
+            </nav>
+          </div>
         </div>
+
+        <form>
+          <div id="input-top" class="row">
+            <div class="small-12 medium-6 columns">
+              <label>Thread Title
+                <input id="thread-input-name" type="text" placeholder="Author Name" />
+              </label>
+            </div>
+
+            <div class="small-12 medium-6 columns">
+              <label for="icon-dropdown">Topic Icon
+                <select id="myDropDown">
+                  <option value="0" data-imagesrc="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Rebel_Alliance_logo.svg/2000px-Rebel_Alliance_logo.svg.png" data-description="Sample Text">Fight The Power</option>
+                  <option value="1" data-imagesrc="http://plainicon.com/dboard/userprod/2800_a1826/prod_thumb/plainicon.com-46991-256px-a71.png" data-description="When $hit is blowin up!">Da Bomb</option>
+                  <option value="2" selected="selected" data-imagesrc="http://openuhclassschedulehelper.github.io/uimockup/eye.svg" data-description="Be on the lookout...">Keep An Eye Out</option>
+                  <option value="3" data-imagesrc="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" data-description="Only the freshest content on the net">Fresh</option>
+                  <option value="4" data-imagesrc="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" data-description="Only the freshest content on the net">Lightning</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-12 medium-6 columns">
+              <label>Thread Title
+                <input id="thread-new-left" type="text" placeholder="Title" />
+              </label>
+            </div>
+
+            <div class="small-12 medium-6 columns">
+              <label>Subheader
+                <input id="thread-new-right" type="text" placeholder="Subtitle" />
+              </label>
+            </div>
+          </div>
+
+
+          <!--   Thread Text Input   -->
+          <div class="row">
+            <div class="medium-1 column">
+              <p></p>
+            </div>
+            <div class="medium-10 columns">
+              <fieldset>
+                <legend>Your Thread Content</legend>
+                <textarea rows="5" placeholder="enter your main content here"></textarea>
+              </fieldset>
+            </div>
+            <div class="medium-1 column">
+              <p></p>
+            </div>
+          </div>
+        </form>
+
+
+        <p></p>
+
+
       </div>
 
-    <form>
-      <div class="row input-top">
-        <div class="medium-4 columns">
-          <label for="icon-dropdown">Topic Icon
-            <select id="myDropDown">
-              <option value="0" data-imagesrc="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Rebel_Alliance_logo.svg/2000px-Rebel_Alliance_logo.svg.png"
-                      data-description="Sample Text">Fight The Power</option>
-              <option value="1" data-imagesrc="http://plainicon.com/dboard/userprod/2800_a1826/prod_thumb/plainicon.com-46991-256px-a71.png"
-                      data-description="When $hit is blowin up!">Da Bomb</option>
-              <option value="2" selected="selected" data-imagesrc="http://openuhclassschedulehelper.github.io/uimockup/eye.svg"
-                      data-description="Be on the lookout...">Keep An Eye Out</option>
-              <option value="3" data-imagesrc="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608"
-                      data-description="Only the freshest content on the net">Fresh</option>
-              <option value="4" data-imagesrc="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608"
-                      data-description="Only the freshest content on the net">Lightning</option>
-            </select>
-          </label>
-        </div>
-        <div class="medium-4 columns">
-          <label>Thread Title
-            <input id="thread-input-center" type="text" placeholder="Title" />
-          </label>
-        </div>
-        <div class="medium-4 columns">
-          <label>Subheader
-            <input id="thread-input-right" type="text" placeholder="Subtitle" />
-          </label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="medium-1 column"><p></p></div>
-        <div class="medium-10 columns">
-       <fieldset>
-          <legend>Your Thread Content</legend>
-         <textarea rows="5" placeholder="enter your main content here"></textarea>
-        </fieldset>
-        </div>
-        <div class="medium-1 column"><p></p></div>
-      </div>
-  </form>
-
-
-<p></p>
-
-
-</div>
-
-<% include bottom.ejs %>
+      <% include bottom.ejs %>
