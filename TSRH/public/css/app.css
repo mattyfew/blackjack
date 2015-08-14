@@ -8,7 +8,15 @@ body {}
   text-decoration: underline;
   font-size: 4em
 }
+
+#show-title {
+	font-family: 'Linden Hill', serif;
+	text-decoration: underline;
+	font-size: 2.5em
+}
+
 #top-row {}
+
 #container-inner {
   border: 1px solid black;
   margin-bottom: 15px;
@@ -18,6 +26,24 @@ body {}
 }
 #container {
   background-color: white;
+}
+#show-thread{
+	border-bottom: 5px solid gray;
+	margin: 0 0 5px 0;
+	padding: 10px;
+}
+#thread-content{
+	text-align: justify;
+	text-justify: inter-word;
+	text-indent: 50px
+}
+#index-thread-title{
+	text-decoration: underline;
+	font-family: 'Alfa Slab One', cursive;
+}
+#index-thread-subtitle{
+	font-style: italic; 
+	color: gray
 }
 .top-icon {
   max-height: 70px;
@@ -36,8 +62,6 @@ body {}
   background-color: white
 }
 .thread-icon {}
-
-
 
 .header-side {
   text-align: center;
@@ -64,8 +88,6 @@ body {}
 .input-top {
   padding: 25px 25px 5px 25px;
 }
-
-
 .dd-selected-image {
   max-height: 31px;
 }

@@ -1,81 +1,80 @@
 <% include top.ejs %>
-  <div id="container">
+	<div id="container">
 
-    <div id="container-inner" class="row">
-      <div class="small-12 columns">
-        <div class="row">
-          <div class="contain-to-grid sticky small-12 columns">
+		<div id="container-inner" class="row">
+			<div class="small-12 columns">
+				<div class="row">
+					<div class="contain-to-grid sticky small-12 columns">
 
-            <!--    NAVIGATION BAR   -->
-            <nav class="top-bar" role=>
-              <ul class="title-area">
-                <li class="name">
-                  <h1><a href="#">TSRH</a></h1>
-                </li>
-                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-              </ul>
-              <section class="top-bar-section">
-                <!-- Left Nav Section -->
-                <ul class="left">
-                  <li><a href="#">Popular Topics</a></li>
-                  <li class="divider"></li>
-                  <li class="has-form"><a class="button alert" href="/tsrh/new">Submit New</a></li>
-                </ul>
+						<!--    NAVIGATION BAR   -->
+						<nav class="top-bar">
+							<ul class="title-area">
+								<li class="name">
+									<h1><a href="#">TSRH</a></h1>
+								</li>
+								<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+							</ul>
+							<section class="top-bar-section">
+								<!-- Left Nav Section -->
+								<ul class="left">
+									<li><a href="#">Popular Topics</a></li>
+									<li class="divider"></li>
+									<li class="has-form"><a class="button alert" href="/tsrh/new">Submit New</a></li>
+								</ul>
 
-                <!-- Right Nav Section -->
-                <ul class="right">
-                  <li><a href="#">User Info(2)</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Logout</a></li>
-                </ul>
-              </section>
-            </nav>
-          </div>
-        </div>
+								<!-- Right Nav Section -->
+								<ul class="right">
+									<li><a href="#">User Info(2)</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Logout</a></li>
+								</ul>
+							</section>
+						</nav>
+					</div>
+				</div>
 
-        <!-- EJS GOES HERE FOR THREADS -->
-        <div class="row thread">
-          <!-- Icon column  -->
-          <div class="medium-1 columns">
-            <img class="thread-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
-          </div>
-          <!-- Thread  -->
-          <div class="medium-11 columns">
-            <p class="thread-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem eum, accusantium perferendis odio! Dolor voluptates laboriosam, odio repellat voluptas, suscipit molestias, culpa mollitia et natus iusto nam nisi impedit totam!</p>
-          </div>
-        </div>
-        <div class="row thread">
-          <!-- Icon column  -->
-          <div class="medium-1 columns">
-            <img class="top-icon top-left-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
-          </div>
-          <!-- Thread  -->
-          <div class="medium-11 columns">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem eum, accusantium perferendis odio! Dolor voluptates laboriosam, odio repellat voluptas, suscipit molestias, culpa mollitia et natus iusto nam nisi impedit totam!</p>
-          </div>
-        </div>
-        <div class="row thread">
-          <!-- Icon column  -->
-          <div class="medium-1 columns">
-            <img class="top-icon top-left-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
-          </div>
-          <!-- Thread  -->
-          <div class="medium-11 columns">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem eum, accusantium perferendis odio! Dolor voluptates laboriosam, odio repellat voluptas, suscipit molestias, culpa mollitia et natus iusto nam nisi impedit totam!</p>
-          </div>
-        </div>
+				<!-- EJS GOES HERE FOR THREADS -->
+				<% threads.forEach(function(thisThread){ %>
 
-      </div>
-    </div>
-    <!--  ^ closed row   -->
-  </div>
+					<div class="row thread">
+						<!-- Icon column  -->
+						<div class="medium-1 columns">
+							<img class="thread-icon" src="<%= thisThread.value %>" alt="thread icon" />
+						</div>
+						<!-- Thread  -->
+						<div class="medium-9 columns">
+								<h5 id="index-thread-title"><a href="/tsrh/<%= thisThread.id %>"><%= thisThread.title %></a></h5>
+							<h6 id="index-thread-subtitle"><%= thisThread.subtitle %></h6>
+							<p class="thread-text">
+								<% if (thisThread.content.length > 100) %>
+									<% {thisThread.content = thisThread.content.substring(0,90) + '...'; %>
+										<%= thisThread.content %>
+											<% } %>
+							</p>
+						</div>
+						<!--	Author	-->
+						<div class="medium-1 columns">
+								<img class="thread-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
+						</div>
+						<!--	Upvotes	-->
+						<div class="medium-1 columns">
+								<img class="thread-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
+						</div>
+					</div>
 
-  <footer>
-    <div class="foot row">
-      <div class="small-12 columns">
-        <p>hhh</p>
-      </div>
-    </div>
-  </footer>
+					<%	}) %>
 
-  <%  include bottom.ejs %>
+			</div>
+		</div>
+		<!--  ^ closed row   -->
+	</div>
+
+	<footer>
+		<div class="foot row">
+			<div class="small-12 columns">
+				<p>hhh</p>
+			</div>
+		</div>
+	</footer>
+
+	<%  include bottom.ejs %>

@@ -9,11 +9,9 @@ CREATE TABLE threads (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   subtitle VARCHAR(100),
-  author_id INTEGER,
+  author_id TEXT,
   content TEXT,
-  topic_img_id INTEGER,
-  FOREIGN KEY (author_id) REFERENCES users(user_id),
-  FOREIGN KEY (topic_img_id) REFERENCES topic_img(img_id)
+  topic_img_url TEXT,
 );
 
 CREATE TABLE users (
@@ -29,12 +27,6 @@ CREATE TABLE comments (
   thread_id INTEGER,
   FOREIGN KEY (comment_author_id) REFERENCES users(user_id),
   FOREIGN KEY (thread_id) REFERENCES threads(id)
-);
-
-CREATE TABLE topic_img (
-  img_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  img_title VARCHAR(25),
-  src_url TEXT
 );
 
 CREATE TABLE upvotes (
