@@ -39,14 +39,25 @@
 
 				<div id="show-thread" class="row">
 					<% thread.forEach(function(thisThread){ %>
+					
 						<!-- Icon column  -->
 						<div class="small-12 medium-1 columns">
 							<img class="top-icon top-left-icon" src="<%= thisThread.topic_img_url %>" alt="diamond" />
+							
+						<!--	Upvotes column -->
+							<div class="row">
+								<div class="small-12 columns">
+									<img class="upvote-icon vote" src="/img/upvoteIcon.png" alt="upvote icon" />
+									<p class="upvote-number"><%= totalUpvotes %></p>
+								</div>
+							</div>
 						</div>
+						
 						<!-- Title  -->
 						<div class="small-12 medium-10 columns">
 							<h1 id="show-title"><%= thisThread.title %></h1>
 						</div>
+						
 						<!--  Author  -->
 						<div class="small-12 medium-1 columns">
 							<aside id="author-in-show">By:
@@ -54,6 +65,7 @@
 							</aside>
 						</div>
 				</div>
+
 				<div class="row">
 					<br>
 					<div class="small-12 medium-10 medium-centered columns">
@@ -89,6 +101,7 @@
 						</div>
 					</div>
 				</form>
+			</div>
 			<!--		LIST COMMENTS BELOW		-->
 		<% cmmnts.forEach(function(comment){ %>		
 			<hr>

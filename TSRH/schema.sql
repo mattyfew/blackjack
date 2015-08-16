@@ -26,6 +26,7 @@ CREATE TABLE comments (
   comment_author_id TEXT,
   content TEXT,
   thread_id INTEGER,
+	img_url TEXT,
   FOREIGN KEY (thread_id) REFERENCES threads(id)
 );
 
@@ -33,6 +34,5 @@ CREATE TABLE upvotes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   user_id INTEGER,
   thread_id INTEGER,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (thread_id) REFERENCES threads(id)
 );

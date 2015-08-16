@@ -32,7 +32,7 @@ app.get('/tsrh/:id/edit', function (req, res) {
 	});
 });
 
-//NEED TO DO: upvotes, comments
+//SHOW GET MASTER
 app.get('/tsrh/:id', function (req, res) {
 	var id = req.params.id;
 	db.all('SELECT * FROM threads INNER JOIN users ON author_id WHERE threads.author_id = users.user_id AND id=?', id, function (err, rows) {
@@ -40,19 +40,21 @@ app.get('/tsrh/:id', function (req, res) {
 			throw err;
 		} else {
 			console.log(rows);
-			
 			db.all('SELECT * FROM comments WHERE thread_id = ?', id, function(err,cmmnts){
 				console.log(cmmnts);
-				res.render('show.ejs', {thread: rows, cmmnts:cmmnts});
-			})
+				db.all('SELECT * FROM upvotes WHERE thread_id = ?', id, function(err, upvotes){
+					console.log(upvotes.length)
+					var totalUpvotes = upvotes.length;
+					res.render('show.ejs', {thread: rows, cmmnts:cmmnts, totalUpvotes:totalUpvotes});
+				});
+			});
 		}
 	});
 });
 
 /*APP.POST --> will post to the main thread page. First it grabs ddselectedvalue,
 it inserts username into the users table, then it creates the post using this.lastId
-to create the relationship.
-*/
+to create the relationship.*/
 //NEED TO DO: add upvotes
 app.post('/tsrh', function (req, res) {
 	//in jquery.ddslickback.min.js, made edit on line 96
@@ -75,6 +77,24 @@ app.post('/tsrh', function (req, res) {
 	})
 });
 
+//PUT Total upvotes for each thread
+//app.get('/tsrh/:id', function(req,res){
+//	var id = req.params.id;
+//	db.run("UPDATE threads SET upvotes = upvotes+1 WHERE id=?", id, function(err){});
+//}
+
+//POST upvotes
+app.post('/tsrh/:id/upvote', function(req,res){
+	var id = req.params.id;
+	db.run('INSERT INTO upvotes (thread_id) VALUES (?)', id, function(err){
+		if(err){
+			throw err;
+		} else {
+			res.redirect('/tsrh/' + id);
+		}
+	})
+})
+
 //COMMENT POST --> this will post a comment from each different post
 app.post('/tsrh/:id', function (req, res) {
 	var id = req.params.id;
@@ -86,7 +106,6 @@ app.post('/tsrh/:id', function (req, res) {
 		}
 	})
 })
-
 app.delete('/tsrh/:id', function (req, res) {
 	//Not sure if I need this, only for admin
 	db.delete('SELECT * FROM threads', function (err, rows) {
@@ -108,8 +127,11 @@ app.get('/tsrh', function (req, res) {
 			//				} else {
 			//					var userNameValue = user.username;
 			//					console.log(userNameValue);
-			res.render('index.ejs', {
-				threads: rows
+			db.all('SELECT * FROM upvotes WHERE thread_id = ?', rows[id], function(err, upvotes){
+				console.log(rows);
+				console.log('UPVOTE LENGTH!!! : '+ upvotes.length)
+				var totalUpvotes = upvotes.length;
+				res.render('index.ejs', {threads: rows, totalUpvotes:totalUpvotes});
 			});
 			//				}
 			//			})

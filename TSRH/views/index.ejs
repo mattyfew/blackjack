@@ -40,9 +40,18 @@
 						<!-- Icon column  -->
 						<div class="medium-1 columns">
 							<img class="thread-icon" src="<%= thisThread.topic_img_url %>" alt="thread icon" />
+							<div class="row">
+								<div class="small-12 columns upvote-wrapper">	
+									<form action="/tsrh/<%= thisThread.id %>/upvote" method="POST">
+										<input type="hidden" name="upvote-icon-index" value="<%= thisThread.id %>">
+										<input class="upvote-icon vote" type="image" src="/img/upvoteIcon.png">
+									</form>
+									<p class="upvote-number"><%= totalUpvotes %></p>
+								</div>
+							</div>
 						</div>
 						<!-- Thread  -->
-						<div class="medium-9 columns">
+						<div class="small-12 medium-8 columns">
 								<h5 id="index-thread-title"><a href="/tsrh/<%= thisThread.id %>"><%= thisThread.title %></a></h5>
 							<h6 id="index-thread-subtitle"><%= thisThread.subtitle %></h6>
 							<p class="thread-text">
@@ -53,20 +62,20 @@
 							</p>
 						</div>
 						<!--	Author	-->
-						<div class="medium-1 columns">
-							<p id="author-in-index">By: <span><%= thisThread.username %></span></p>
+						<!--		BROKENNNNNNNNNNNNNNNNNNNNNNNNNNNN				-->
+						<div class="small-12 medium-3 columns">
+							<div class="row">
+								<div class="small-12 columns">
+									<p id="author-in-index">By: <span><%= thisThread.username %></span></p>
+								</div>
+							</div>
 						</div>
-						<!--	Upvotes	-->
-						<div class="medium-1 columns">
-								<h6>Upvotes</h6>
-						</div>
-					</div>
+				</div> <!--closes thread div-->
 
 				<%	}) %>
 
 			</div>
 		</div>
-		<!--  ^ closed row   -->
 	</div>
 
 	<%  include bottom.ejs %>

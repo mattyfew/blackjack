@@ -65,6 +65,7 @@ a.button{
 	font-style: italic; 
 	color: gray
 }
+
 #author-in-index span {
 	color: green;
 	font-size: 0.9em;
@@ -95,7 +96,9 @@ a.button{
   padding: 10px;
   background-color: white
 }
-.thread-icon {}
+.thread-icon {
+	margin-bottom: 10px;
+}
 
 .header-side {
   text-align: center;
@@ -104,28 +107,43 @@ a.button{
   border-right: 1px solid white;
 }
 
-/*inputs in /tsrh/new */
-
-
-#thread-new-left {
-  height: 53px;
+/* upvotes */
+.upvote-wrapper{
+	margin: auto;
+}
+button.button .upvote-icon{
+	
+}
+.upvote-icon{
+	max-height: 12px;
+	float:left;
+	margin-top: 7px;
+	margin-right: 7px;
+}
+.vote {
+	overflow: hidden;
+	cursor: pointer;
+} 
+.vote.on {
+	visibility: hidden;
 }
 
+/*inputs in /tsrh/new */
+#thread-new-left {
+	height: 53px;
+}
 #thread-new-right {
   height: 53px;
 }
-
 #thread-input-name {
   height: 53px;
 }
-
 .input-top {
   padding: 25px 25px 5px 25px;
 }
 .dd-selected-image {
   max-height: 31px;
 }
-
 footer {
   background-color: white;
 }
