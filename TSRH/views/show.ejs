@@ -12,7 +12,7 @@
 						<nav class="top-bar" role=>
 							<ul class="title-area">
 								<li class="name">
-									<h1><a href="#">TSRH</a></h1>
+									<h1><a href="/">TSRH</a></h1>
 								</li>
 								<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 							</ul>
@@ -41,7 +41,7 @@
 					<% thread.forEach(function(thisThread){ %>
 						<!-- Icon column  -->
 						<div class="small-12 medium-1 columns">
-							<img class="top-icon top-left-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
+							<img class="top-icon top-left-icon" src="<%= thisThread.topic_img_url %>" alt="diamond" />
 						</div>
 						<!-- Title  -->
 						<div class="small-12 medium-10 columns">
@@ -49,37 +49,60 @@
 						</div>
 						<!--  Author  -->
 						<div class="small-12 medium-1 columns">
-							<aside>author:
-								<%= thisThread.author_id %>
+							<aside id="author-in-show">By:
+								<span><%= thisThread.username %></span>
 							</aside>
 						</div>
 				</div>
 				<div class="row">
 					<br>
-					<div class="medium-1 column">
-						<p></p>
-					</div>
-					<div class="small-12 medium-10 columns">
+					<div class="small-12 medium-10 medium-centered columns">
 							<p id="thread-content" >
 								<%= thisThread.content %>
 							</p>
 					</div>
-					<div class="medium-1 column">
-						<p></p>
-					</div>
 				</div>
-				<% }) %>
+				
+			<!--	ENTER COMMENTS HERE-->
+			<hr>
+				<form action="/tsrh/<%= thisThread.id %>" method="POST">
+					<div class="row">
+						<div class="small-12 columns">
+							<h3 id="comment-header" class="left">Leave a Comment</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 medium-4 columns">
+							<label for="Comment Author">Comment Author
+								<input type="text" name="comment_author_name" placeholder="Author Name">
+							</label>
+						</div>
+						<div class="small-12 medium-8 columns">
+							<label for="comment content">Comment
+								<textarea rows= "3" type="text" name="comment_content_name" placeholder="write your comment here"></textarea>
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-11 small-centered columns">
+							<button class="alert small right">Submit</button>
+						</div>
+					</div>
+				</form>
+			<!--		LIST COMMENTS BELOW		-->
+		<% cmmnts.forEach(function(comment){ %>		
+			<hr>
+				<div class="row">
+					<div class="small-9 small-centered columns">
+						<h6><%= comment.comment_author_id%></h6>
+						<p><%= comment.content %></p>
+					</div>
+				</div>	
+		<%	})	%>
+				<% }) %> <!--  ends the forEach loop   -->
 			</div>
 		</div>
 		<!--  ^ closed row   -->
 	</div>
-
-	<footer>
-		<div class="foot row">
-			<div class="small-12 columns">
-				<p>hhh</p>
-			</div>
-		</div>
-	</footer>
 
 	<% include bottom.ejs %>

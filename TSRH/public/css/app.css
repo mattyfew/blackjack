@@ -2,17 +2,36 @@ header {
   margin: auto;
   text-align: center;
 }
-body {}
+body {
+	font-family: 'Open Sans', sans-serif;
+}
 #title {
   font-family: 'Orbitron', sans-serif;
   text-decoration: underline;
   font-size: 4em
 }
+a:link,
+a:visited{
+	color: #333;
+	text-decoration: underline;
+}
+a:hover,
+a:active{
+	color: #666;
+}
+a.button{
+	text-decoration: none;
+}
+.title-area .name a{
+	font-weight: 700;
+	text-decoration: none;
+}
 
 #show-title {
-	font-family: 'Linden Hill', serif;
+	font-family: 'Open Sans', sans-serif;
 	text-decoration: underline;
-	font-size: 2.5em
+	font-weight: 800;
+	font-size: 1.9em
 }
 
 #top-row {}
@@ -39,11 +58,26 @@ body {}
 }
 #index-thread-title{
 	text-decoration: underline;
-	font-family: 'Alfa Slab One', cursive;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 800
 }
 #index-thread-subtitle{
 	font-style: italic; 
 	color: gray
+}
+#author-in-index span {
+	color: green;
+	font-size: 0.9em;
+	font-weight: 700;
+}
+#author-in-show span {
+	color:green;
+	font-size: 0.9em;
+	font-weight: 700
+}
+#comment-header{
+	text-align: center;
+	font-weight: 600
 }
 .top-icon {
   max-height: 70px;
@@ -93,5 +127,8 @@ body {}
 }
 
 footer {
-  background-color: dimgray;
+  background-color: white;
+}
+.signature {
+	max-height: 60px;
 }

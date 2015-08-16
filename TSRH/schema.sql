@@ -9,23 +9,23 @@ CREATE TABLE threads (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   subtitle VARCHAR(100),
-  author_id TEXT,
+  author_id INTEGER,
   content TEXT,
   topic_img_url TEXT,
+	FOREIGN KEY (author_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE users (
   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username VARCHAR(12),
+  username VARCHAR(20),
   user_avatar_url TEXT
 );
 
 CREATE TABLE comments (
   comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
-  comment_author_id INTEGER,
+  comment_author_id TEXT,
   content TEXT,
   thread_id INTEGER,
-  FOREIGN KEY (comment_author_id) REFERENCES users(user_id),
   FOREIGN KEY (thread_id) REFERENCES threads(id)
 );
 

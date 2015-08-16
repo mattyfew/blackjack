@@ -8,35 +8,35 @@ var ddData = [
 	},
 	{
 		text: "Da Bomb",
-		value: 2,
+		value: "http://plainicon.com/dboard/userprod/2800_a1826/prod_thumb/plainicon.com-46991-256px-a71.png",
 		selected: false,
 		description: "When $hit is blowin' up!",
 		imageSrc: "http://plainicon.com/dboard/userprod/2800_a1826/prod_thumb/plainicon.com-46991-256px-a71.png"
 	},
 	{
 		text: "Keep an Eye Out",
-		value: 3,
+		value: "http://www.sinapsiroma.it/site/images/yootheme/demo/default/frontpage/sorveglianza.png",
 		selected: true,
 		description: "Be on the lookout...",
-		imageSrc: "http://openuhclassschedulehelper.github.io/uimockup/eye.svg"
+		imageSrc: "http://www.sinapsiroma.it/site/images/yootheme/demo/default/frontpage/sorveglianza.png"
 	},
 	{
 		text: "Fresh",
-		value: 4,
+		value: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608",
 		selected: false,
 		description: "Only the freshest content",
 		imageSrc: "http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608"
 	},
 	{
 		text: "News",
-		value: 5,
+		value: "http://www.cfgforensics.com/images/icons/investigation_icon.png",
 		selected: false,
 		description: "News clippin",
 		imageSrc: "http://www.cfgforensics.com/images/icons/investigation_icon.png"
 	},
 	{
 		text: "Lightning",
-		value: 6,
+		value: "http://www.wyklejanietablic.pl/cc/icon_927.png",
 		selected: false,
 		description: "This just in!",
 		imageSrc: "http://www.wyklejanietablic.pl/cc/icon_927.png"
@@ -52,6 +52,7 @@ $(document).ready(function() {
 		height: 190,
 		background: "#FFFFFF",
 		onSelected: function(selectedData) {
+			name="dropdown_url" 
 		}
 	})
 });

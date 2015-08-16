@@ -10,7 +10,7 @@
 						<nav class="top-bar">
 							<ul class="title-area">
 								<li class="name">
-									<h1><a href="#">TSRH</a></h1>
+									<h1><a href="/">TSRH</a></h1>
 								</li>
 								<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 							</ul>
@@ -39,7 +39,7 @@
 					<div class="row thread">
 						<!-- Icon column  -->
 						<div class="medium-1 columns">
-							<img class="thread-icon" src="<%= thisThread.value %>" alt="thread icon" />
+							<img class="thread-icon" src="<%= thisThread.topic_img_url %>" alt="thread icon" />
 						</div>
 						<!-- Thread  -->
 						<div class="medium-9 columns">
@@ -54,27 +54,19 @@
 						</div>
 						<!--	Author	-->
 						<div class="medium-1 columns">
-								<img class="thread-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
+							<p id="author-in-index">By: <span><%= thisThread.username %></span></p>
 						</div>
 						<!--	Upvotes	-->
 						<div class="medium-1 columns">
-								<img class="thread-icon" src="http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=34025608" alt="diamond" />
+								<h6>Upvotes</h6>
 						</div>
 					</div>
 
-					<%	}) %>
+				<%	}) %>
 
 			</div>
 		</div>
 		<!--  ^ closed row   -->
 	</div>
-
-	<footer>
-		<div class="foot row">
-			<div class="small-12 columns">
-				<p>hhh</p>
-			</div>
-		</div>
-	</footer>
 
 	<%  include bottom.ejs %>
