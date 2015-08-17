@@ -45,10 +45,16 @@
 							<img class="top-icon top-left-icon" src="<%= thisThread.topic_img_url %>" alt="diamond" />
 							
 						<!--	Upvotes column -->
+
+						
+						
 							<div class="row">
 								<div class="small-12 columns">
-									<img class="upvote-icon vote" src="/img/upvoteIcon.png" alt="upvote icon" />
-									<p class="upvote-number"><%= totalUpvotes %></p>
+									<form action="/tsrh/<%= thisThread.id %>/upvote" method="POST">
+										<input type="hidden" name="upvote-icon-index" value="<%= thisThread.id %>">
+										<input class="upvote-icon vote" type="image" src="/img/upvoteIcon.png">
+									</form>
+									<p class="upvote-number"><%= thisThread.total_upvotes %></p>
 								</div>
 							</div>
 						</div>

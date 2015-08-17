@@ -39,14 +39,15 @@ app.get('/tsrh/:id', function (req, res) {
 		if (err) {
 			throw err;
 		} else {
-			console.log(rows);
-			db.all('SELECT * FROM comments WHERE thread_id = ?', id, function(err,cmmnts){
-				console.log(cmmnts);
-				db.all('SELECT * FROM upvotes WHERE thread_id = ?', id, function(err, upvotes){
-					console.log(upvotes.length)
-					var totalUpvotes = upvotes.length;
-					res.render('show.ejs', {thread: rows, cmmnts:cmmnts, totalUpvotes:totalUpvotes});
-				});
+			db.all('SELECT * FROM comments WHERE thread_id = ?', id, function (err, cmmnts) {
+				if (err) {
+					throw err;
+				} else {
+					res.render('show.ejs', {
+						thread: rows,
+						cmmnts: cmmnts,
+					});
+				}
 			});
 		}
 	});
@@ -55,7 +56,6 @@ app.get('/tsrh/:id', function (req, res) {
 /*APP.POST --> will post to the main thread page. First it grabs ddselectedvalue,
 it inserts username into the users table, then it creates the post using this.lastId
 to create the relationship.*/
-//NEED TO DO: add upvotes
 app.post('/tsrh', function (req, res) {
 	//in jquery.ddslickback.min.js, made edit on line 96
 	var ddslick = req.body.mf_dd_selected_value;
@@ -66,7 +66,7 @@ app.post('/tsrh', function (req, res) {
 			throw err;
 		} else {
 			var id = this.lastID;
-			db.run('INSERT INTO threads (title, subtitle, author_id, topic_img_url, content) VALUES (?,?,?,?,?)', req.body.thread_title, req.body.thread_subtitle, id, ddslick, req.body.thread_content, function (err) {
+			db.run('INSERT INTO threads (title, subtitle, author_id, topic_img_url, content, total_upvotes) VALUES (?,?,?,?,?,?)', req.body.thread_title, req.body.thread_subtitle, id, ddslick, req.body.thread_content,0, function (err) {
 				if (err) {
 					throw err;
 				} else {
@@ -84,10 +84,10 @@ app.post('/tsrh', function (req, res) {
 //}
 
 //POST upvotes
-app.post('/tsrh/:id/upvote', function(req,res){
+app.put('/tsrh/:id/upvote', function (req, res) {
 	var id = req.params.id;
-	db.run('INSERT INTO upvotes (thread_id) VALUES (?)', id, function(err){
-		if(err){
+	db.run('INSERT INTO upvotes (thread_id) VALUES (?)', id, function (err) {
+		if (err) {
 			throw err;
 		} else {
 			res.redirect('/tsrh/' + id);
@@ -98,11 +98,11 @@ app.post('/tsrh/:id/upvote', function(req,res){
 //COMMENT POST --> this will post a comment from each different post
 app.post('/tsrh/:id', function (req, res) {
 	var id = req.params.id;
-	db.run('INSERT INTO comments (comment_author_id, content, thread_id) VALUES (?,?,?)', req.body.comment_author_name, req.body.comment_content_name, id, function (err,rows) {
+	db.run('INSERT INTO comments (comment_author_id, content, thread_id) VALUES (?,?,?)', req.body.comment_author_name, req.body.comment_content_name, id, function (err, rows) {
 		if (err) {
 			throw err;
 		} else {
-			res.redirect('/tsrh/'+ id);
+			res.redirect('/tsrh/' + id);
 		}
 	})
 })
@@ -121,23 +121,25 @@ app.get('/tsrh', function (req, res) {
 		if (err) {
 			throw err;
 		} else {
-			//			db.get('SELECT username FROM users WHERE id=?', function (err, user) {
-			//				if(err){
-			//					throw err;
-			//				} else {
-			//					var userNameValue = user.username;
-			//					console.log(userNameValue);
-			db.all('SELECT * FROM upvotes WHERE thread_id = ?', rows[id], function(err, upvotes){
-				console.log(rows);
-				console.log('UPVOTE LENGTH!!! : '+ upvotes.length)
-				var totalUpvotes = upvotes.length;
-				res.render('index.ejs', {threads: rows, totalUpvotes:totalUpvotes});
+			res.render('index.ejs', {
+				threads: rows,
 			});
-			//				}
-			//			})
 		}
 	})
 })
+
+app.post('/tsrh/:id/upvote', function(req,res){
+	var id = req.params.id;
+	db.run("UPDATE threads SET total_upvotes = total_upvotes+1 WHERE id=?", id, function(err,row){
+		if(err){
+			throw err;
+		} else {
+			console.log(row)
+			res.redirect('/tsrh/' + id);
+		}
+	});
+})
+
 app.get('/', function (req, res) {
 	res.redirect('/tsrh');
 });

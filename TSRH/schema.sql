@@ -12,6 +12,7 @@ CREATE TABLE threads (
   author_id INTEGER,
   content TEXT,
   topic_img_url TEXT,
+	total_upvotes INTEGER,
 	FOREIGN KEY (author_id) REFERENCES users(user_id)
 );
 
