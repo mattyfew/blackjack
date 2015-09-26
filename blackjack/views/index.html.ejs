@@ -1,0 +1,136 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href='http://fonts.googleapis.com/css?family=Oxygen:700' rel='stylesheet' type='text/css'>
+	<link rel="icon" href="img/favicon.png" type="image/png">
+	<title>BlackJack</title>
+	<link rel="stylesheet" href="stylesheets/normalize.css" />
+	<link rel="stylesheet" href="stylesheets/foundation.css" />
+	<link rel="stylesheet" href="stylesheets/blackjack.css" />
+	<script src="scripts/vendor/modernizr.js"></script>
+</head>
+
+<body>
+	<div id="startmodal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+		<div id="modalrow" class="row">
+			<div class="small-12 medium-9 medium-centered columns">
+				<h2 id="modalTitle">BlackJack!?</h2>
+				<p>Click the button below to shuffle the deck and start playing!</p>
+				<div class="dropdown">
+					<label>Please select the number of decks you wish to play with.
+						<select id="pickdecks" name="selectionField">
+							<option value="1">1 Deck (52 Cards)</option>
+							<option value="2">2 Decks (104 Cards)</option>
+							<option value="3">3 Decks (156 Cards)</option>
+							<option value="4">4 Decks (208 Cards)</option>
+							<option value="5">5 Decks (260 Cards)</option>
+						</select>
+					</label>
+				</div>
+				<a id="startbutton" class='open-first button success'>Deal em'</a>
+			</div>
+		</div>
+	</div>
+	<header>
+		<div id="top" class="row">
+			<div class="small-12 medium-12 large-12 columns">
+				<h1>BlackJack</h1>
+			</div>
+		</div>
+	</header>
+	<div id="container">
+		<div class="row">
+			<div class="small-12 columns"></div>
+		</div>
+		<div class="row">
+			<div class="small-4 columns"></div>
+			<div id="dealer" class="small-4 columns dealer">
+				<h3>Dealer</h3>
+				<p></p>
+			</div>
+			<div class="small-4 columns">
+				<aside id="stats" class="panel callout radius">
+					<h5>Your Current Stats</h4>
+						<p></p>
+					</aside>
+				</div>
+			</div>
+			<div class="row">
+				<div class="small-2 columns"></div>
+				<div class="small-8 columns"></div>
+				<div class="small-2 columns"></div>
+			</div>
+			<div id="player-side-row" class="row">
+				<div id="prompter-module" class="small-4 columns">
+					<div id="prompter">
+						<h4>Prompter</h4>
+						<p></p>
+					</div>
+				</div>
+				<div id="myHand" class="small-4 columns player">
+					<h3>My Hand</h3>
+					<p></p>
+				</div>
+				<div class="small-4 columns"></div>
+			</div>
+  		<div id="below-player-side-row" class="row">
+		  <div class="small-4 columns">  
+			<ul id="bet-selector" class="inline-list">
+				<li id="bet-1" class="bet" value="1" ><img src="img/chips/chip-01.png"/></li>
+				<li id="bet-5" class="bet" value="5"><img src="img/chips/chip-05.png"/></li>
+				<li id="bet-10" class="bet" value="10"><img src="img/chips/chip-10.png"/></li>
+				<li id="bet-25" class="bet" value="25" ><img src="img/chips/chip-25.png"/></li>
+			    <li id="bet-100" class="bet" value="100"><img src="img/chips/chip-100.png"/></li>
+			</ul>
+  		  </div>
+		  <div class="small-4 columns">
+			<div id="player-bet">
+				<h4>My Bet</h4>
+				<p></p>
+			</div>
+		  </div>
+		  <div class="small-4 columns">
+			<div id="bankroll">
+				<h4>Bankroll</h4>
+				<p></p>
+			</div>
+		  </div>
+	   </div>
+	  	<div id="bottom" class="row" >
+	  		<div class="small-12 medium-3 columns">
+	  			<button id="play-button" class="button round expand" value="play" style="display: inline-block;">PLAY</button>
+	  		</div>
+		  	<div class="small-12 medium-6 columns">
+				<ul class="button-group round even-2">
+					<li><a id="hit-button" class="button" value="hit">HIT</a></li>
+					<li><a id="stay-button" class="button" value="stay">STAY</a></li>
+				</ul>
+		  	</div>
+			<div class="small-12 medium-3 columns">
+			</div>
+		</div>
+		<div id="bottom-bottom" class="row">
+			<div class="small-12 medium-6 medium-centered columns">
+			  <ul id="dealer-actions-extra"class="button-group round even-2">
+				  <li><a class="button alert" value="split">SPLIT</a></li>
+				  <li><a class="button alert" value="doubledown">DOUBLE-DOWN</a></li>
+			  </ul>
+			</div>		
+		</div>
+<!--
+			  <div class="small-12 medium-6 medium-centered columns">
+				  <button id="play-button" class="button round even-2" value="play">PLAY</button>
+			</div>
+-->
+		  </div>
+
+<!--	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>-->
+	<script src="scripts/vendor/jquery.js"></script>
+	<script src="scripts/foundation.min.js"></script>
+	<script src="scripts/blackjack.js"></script>
+	
+</body>
+</html>

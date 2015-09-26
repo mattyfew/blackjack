@@ -19,6 +19,7 @@ db.run('PRAGMA foreign_keys=ON;');
 app.get('/tsrh/new', function (req, res) {
 	res.render('new.ejs');
 });
+
 app.get('/tsrh/:id/edit', function (req, res) {
 	var id = req.params.id;
 	db.get('SELECT * FROM threads WHERE id=?', id, function (err, rows) {
@@ -106,6 +107,7 @@ app.post('/tsrh/:id', function (req, res) {
 		}
 	})
 })
+
 app.delete('/tsrh/:id', function (req, res) {
 	//Not sure if I need this, only for admin
 	db.delete('SELECT * FROM threads', function (err, rows) {
@@ -116,6 +118,7 @@ app.delete('/tsrh/:id', function (req, res) {
 		}
 	});
 });
+
 app.get('/tsrh', function (req, res) {
 	db.all('SELECT * FROM threads INNER JOIN users ON author_id WHERE threads.author_id = users.user_id', function (err, rows) {
 		if (err) {
@@ -143,6 +146,7 @@ app.post('/tsrh/:id/upvote', function(req,res){
 app.get('/', function (req, res) {
 	res.redirect('/tsrh');
 });
+
 app.listen(3000, function (err) {
 	console.log('listening on port 3000 bitch');
 });

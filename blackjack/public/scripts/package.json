@@ -1,0 +1,12 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "description": "game of blackjack",
+  "main": "blackjack.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
